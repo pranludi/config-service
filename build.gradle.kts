@@ -39,21 +39,17 @@ tasks.withType<Test> {
 }
 
 tasks.named<BootBuildImage>("bootBuildImage") {
-	imageName.set("${project.name}")
+	imageName.set(project.name)
 	environment.set(
 		mapOf(
 			"BP_JVM_VERSION" to "21.*"
 		)
 	)
-	publish.set(true)
 	docker {
 		publishRegistry {
-			var rName = project.findProperty("registryUsername") as String?
-			var rToken = project.findProperty("registryToken") as String?
-			var rUrl = project.findProperty("registryUrl") as String?
-			username.set(rName)
-			password.set(rToken)
-			url.set(rUrl)
+			username = project.findProperty("registryUsername") as String?
+			password = project.findProperty("registryToken") as String?
+			url = project.findProperty("registryUrl") as String?
 		}
 	}
 }
